@@ -72,6 +72,10 @@ class ReadersWritersMonitor:
         3. If this was the last reader, wake waiting threads.
         """
         with self.condition:
+            self.active_readers -= 1
+            print(f"Reader {reader_id} ends reading. Active readers = {self.active_readers}")
+            if self.active_readers == 0:
+                self.condition.notify_all()
             # TODO: Replace 'pass' with your logic
             pass
 
