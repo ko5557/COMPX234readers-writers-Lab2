@@ -54,6 +54,11 @@ class ReadersWritersMonitor:
         4. Print a useful log message.
         """
         with self.condition:
+            while self.active_writers > 0:
+                self.condition.wait()
+            #After safe reader start to read
+            self.active_readers += 1
+            print(f"Reader {reader_id} staarts reading. Active readers = {self.active_readers}")
             # TODO: Replace 'pass' with your logic
             pass
 
