@@ -112,6 +112,10 @@ class ReadersWritersMonitor:
         3. Wake waiting threads.
         """
         with self.condition:
+            self.active_writers = 0
+            print(f"Writer {writer_id} end write. Active writers = {self.active_writers}")
+            
+            self.condition.notify_all()
             # TODO: Replace 'pass' with your logic
             pass
 
